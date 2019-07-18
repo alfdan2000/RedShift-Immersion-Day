@@ -1,4 +1,459 @@
 # RedShift-Immersion-Day
 
-Copyright 2019, Amazon Web Services, All Rights Reserved1Lab 2.4 Working with a 170GB Public Dataset (Global DB of Events, Language & Tone)In the previous labs, you worked with an extremly small dataset (less than < 10MB) and with a single data source. In this lab, let’s use a public dataset with bigger size and more tables and observe various services. The Global Database of Events, Language and Tone (GDELT) Project monitors the world's broadcast, print, and web news from nearly every corner of every country in over 100 languages and identifies the people, locations, organisations, counts, themes, sources, emotions, counts, quotes, images and events driving our global society every second of every day. The data set v1.0 is publicly available in S3 in the Registry of Open Data on AWS.In this lab, you will explore, catalogue, visualize, interact with this data using AWS services.The data set we will use contains (at the time to writing) thousands of uncompressed CSV files: hundreds of millions of lines, and is about 170GB. The Data format is defined here. The queries below are from Julien Simon’s blog.
-Copyright 2019, Amazon Web Services, All Rights Reserved2You will use Athena to define columns you needed with the right type and point to the S3 bucket holding all files (in another AWS account). Athena will also be used in later labs to query data hosted in S3. 1.   Navigate to Athena in the console 2.   Enter the following HIVE DDL statement to create a database in glue metadata storeCREATE DATABASE gdelt;3.   Create a Table referring to the S3 bucket holding all files in the AWS account.a.   Before we proceed, a few remarks:i.   We are creating a schema definition in our Glue service, in our Data Catalogueii.   The actual data is in another AWS accountiii.   You can Access this data, because it is a public dataset located in 's3://gdelt-open-data/events/folder, and is open to everyone.iv.   Although we are creating TABLEs, there is no database. The events table is a representation of thousands of TSV (Tab Seperated Files) files stored in S3. Technologies like Apache HIVE and Presto enables accessing them using SQL like expressions.CREATE EXTERNAL TABLE IF NOT EXISTS gdelt.events (        `globaleventid` INT,        `day` INT,        `monthyear` INT,        `year` INT,        `fractiondate` FLOAT,        `actor1code` string,        `actor1name` string,        `actor1countrycode` string,        `actor1knowngroupcode` string,        `actor1ethniccode` string,        `actor1religion1code` string,        `actor1religion2code` string,        `actor1type1code` string,        `actor1type2code` string,        `actor1type3code` string,        `actor2code` string,        `actor2name` string,        `actor2countrycode` string,        `actor2knowngroupcode` string,        `actor2ethniccode` string,        `actor2religion1code` string,        `actor2religion2code` string,
+Lab 2.4 Working with a 170GB Public Dataset (Global DB of Events, Language & Tone)
+
+In the previous labs, you worked with an extremly small dataset (less than < 10MB) and with a single data source. In this lab, let’s use a public dataset with bigger size and more tables and observe various services. 
+
+  
+
+
+The Global Database of Events, Language and Tone (GDELT) Project monitors the world's broadcast, print, and web news from nearly every corner of every country in over 100 languages and identifies the people, locations, organisations, counts, themes, sources, emotions, counts, quotes, images and events driving our global society every second of every day. The data set v1.0 is publicly available in S3 in the Registry of Open Data on AWS.
+
+In this lab, you will explore, catalogue, visualize, interact with this data using AWS services.
+The data set we will use contains (at the time to writing) thousands of uncompressed CSV files: hundreds of millions of lines, and is about 170GB. The Data format is defined here. The queries below are from Julien Simon’s blog.
+
+
+
+You will use Athena to define columns you needed with the right type and point to the S3 bucket holding all files (in another AWS account). Athena will also be used in later labs to query data hosted in S3. 
+
+1.	Navigate to Athena in the console 
+
+2.	Enter the following HIVE DDL statement to create a database in glue metadata store
+
+
+CREATE DATABASE gdelt;
+
+
+3.	Create a Table referring to the S3 bucket holding all files in the AWS account.
+a.	Before we proceed, a few remarks:
+i.	We are creating a schema definition in our Glue service, in our Data Catalogue
+ii.	The actual data is in another AWS account
+iii.	You can Access this data, because it is a public dataset located in 's3://gdelt-open-data/events/folder, and is open to everyone.
+iv.	Although we are creating TABLEs, there is no database. The events table is a representation of thousands of TSV (Tab Seperated Files) files stored in S3. Technologies like Apache HIVE and Presto enables accessing them using SQL like expressions.
+
+
+
+
+CREATE EXTERNAL TABLE IF NOT EXISTS gdelt.events (
+        `globaleventid` INT,
+        `day` INT,
+        `monthyear` INT,
+        `year` INT,
+        `fractiondate` FLOAT,
+        `actor1code` string,
+        `actor1name` string,
+        `actor1countrycode` string,
+        `actor1knowngroupcode` string,
+        `actor1ethniccode` string,
+        `actor1religion1code` string,
+        `actor1religion2code` string,
+        `actor1type1code` string,
+        `actor1type2code` string,
+        `actor1type3code` string,
+        `actor2code` string,
+        `actor2name` string,
+        `actor2countrycode` string,
+        `actor2knowngroupcode` string,
+        `actor2ethniccode` string,
+        `actor2religion1code` string,
+        `actor2religion2code` string,
+        `actor2type1code` string,
+        `actor2type2code` string,
+        `actor2type3code` string,
+        `isrootevent` BOOLEAN,
+        `eventcode` string,
+        `eventbasecode` string,
+        `eventrootcode` string,
+        `quadclass` INT,
+        `goldsteinscale` FLOAT,
+        `nummentions` INT,
+        `numsources` INT,
+        `numarticles` INT,
+        `avgtone` FLOAT,
+        `actor1geo_type` INT,
+        `actor1geo_fullname` string,
+        `actor1geo_countrycode` string,
+        `actor1geo_adm1code` string,
+        `actor1geo_lat` FLOAT,
+        `actor1geo_long` FLOAT,
+        `actor1geo_featureid` INT,
+        `actor2geo_type` INT,
+        `actor2geo_fullname` string,
+        `actor2geo_countrycode` string,
+        `actor2geo_adm1code` string,
+        `actor2geo_lat` FLOAT,
+        `actor2geo_long` FLOAT,
+        `actor2geo_featureid` INT,
+        `actiongeo_type` INT,
+        `actiongeo_fullname` string,
+        `actiongeo_countrycode` string,
+        `actiongeo_adm1code` string,
+        `actiongeo_lat` FLOAT,
+        `actiongeo_long` FLOAT,
+        `actiongeo_featureid` INT,
+        `dateadded` INT,
+        `sourceurl` string
+) 
+ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe'
+WITH SERDEPROPERTIES (
+        'serialization.format' = '\t','field.delim' = '\t') LOCATION 's3://gdelt-open-data/events/';
+
+4.	Create lookup tables.
+a.	There are a few tables in the GDELT dataset, and they provide human-friendly descriptions to event codes and country codes in the events table defined in the previous step. They are also TSV files stored in S3.
+i.	The Countries file that will be used as a lookup table looks like below: https://www.gdeltproject.org/data/lookups/CAMEO.country.txt
+ 
+
+ii.	The EventCodes file that will be used as a lookup table looks like below:  https://www.gdeltproject.org/data/lookups/CAMEO.eventcodes.txt
+
+ 
+
+iii.	The Groups file that will be used as a lookup table looks like below:
+ 
+
+iv.	The Types file that will be used as a lookup table looks like below:
+ 
+
+b.	To maket his exercise interesting, you will store these files in your S3 bucket. The Events table and the lookup tables will be used in a few queries using Athena. 
+
+5.	First, download the files below to your computer:
+a.	Eventcodes: https://www.gdeltproject.org/data/lookups/CAMEO.eventcodes.txt
+b.	Countries: https://www.gdeltproject.org/data/lookups/CAMEO.country.txt
+c.	Types: https://www.gdeltproject.org/data/lookups/CAMEO.type.txt 
+d.	Groups: https://www.gdeltproject.org/data/lookups/CAMEO.knowngroup.txt
+
+
+
+6.	Navigate to S3 in your console. We will reuse the S3 bucket that was created in the previous lab.
+
+7.	Open your bucket and create the following 4 folders (all lowercase)
+a.	Folder 1: 	countries
+b.	Folder 2: 	eventcodes
+c.	Folder 3: 	groups 
+d.	Folder 4: 	types
+
+ 
+
+
+8.	Put the corresponding file under each bucket (e.g. 
+a.	Upload CAMEO.eventcodes.txt file from your computer under eventcodes
+b.	Upload CAMEO. countries.txt file from your computer under countries
+c.	Upload CAMEO. groups.txt file from your computer under groups
+d.	Upload CAMEO. types.txt file from your computer under types
+
+9.	Navigate to your Athena Console. You will now add the files to your data catalogue
+
+10.	Run the following DDL statements from the Athena Console for the lookup tables. Important: Replace YOURINITIALS in bucket name before running the DDL.
+
+11.	Add eventcodes to the data catalogue by pasting the DDL below to Athena Console, replacing your initials and selecting “Run Query”
+
+CREATE EXTERNAL TABLE IF NOT EXISTS gdelt.eventcodes (
+         `code` string,
+         `description` string 
+) 
+ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe'
+WITH SERDEPROPERTIES (
+         'serialization.format' = '\t','field.delim' = '\t') 
+LOCATION 's3://<your initials + two digit number>-tame-bda-immersion/eventcodes' 
+TBLPROPERTIES ( "skip.header.line.count"="1")
+12.	Add types to the data catalogue by pasting the DDL below to Athena Console, replacing your initials and selecting “Run Query”
+
+CREATE EXTERNAL TABLE IF NOT EXISTS gdelt.types (
+        `type` string,
+        `description` string
+) 
+ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe'
+WITH SERDEPROPERTIES (
+        'serialization.format' = '\t','field.delim' = '\t') 
+LOCATION 's3://<your initials + two digit number>-tame-bda-immersion/types/'
+TBLPROPERTIES ( "skip.header.line.count"="1");
+
+
+
+13.	Add groups to the data catalogue by pasting the DDL below to Athena Console, replacing your initials and selecting “Run Query”
+
+CREATE EXTERNAL TABLE IF NOT EXISTS gdelt.groups (
+        `group` string,
+        `description` string
+) 
+ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe'
+WITH SERDEPROPERTIES (
+        'serialization.format' = '\t','field.delim' = '\t') 
+LOCATION 's3://<your initials + two digit number>-tame-bda-immersion/groups/'
+TBLPROPERTIES ( "skip.header.line.count"="1");
+
+
+14.	Add countries to the data catalogue by pasting the DDL below to Athena Console, replacing your initials and selecting “Run Query”
+
+
+CREATE EXTERNAL TABLE IF NOT EXISTS gdelt.countries (
+        `code` string,
+        `country` string
+) 
+ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe'
+WITH SERDEPROPERTIES (
+        'serialization.format' = '\t','field.delim' = '\t') 
+LOCATION 's3://<your initials + two digit number>-tame-bda-immersion/countries/'
+TBLPROPERTIES ( "skip.header.line.count"="1");
+
+
+
+
+15.	Now lets explore the data with the queries below. 
+a.	First find the number of events per year from the Events table
+
+	-- Find the number of events per year
+SELECT year,
+	       COUNT(globaleventid) AS nb_events
+	FROM gdelt.events
+	GROUP BY year
+	ORDER BY year ASC;
+
+
+Output:
+ 
+
+16.	Notice the data amount scanned? The results are returned in less than 30 seconds by scanning 175 GB of data from thousands of uncompressed CSV files on S3. That’s the power of HIVE, Presto and other Hadoop Technologies simplified by Athena Service.
+
+17.	Now let’s show the sorted top 10 event categories by joining Events table and the Eventcode lookup table:
+
+
+	-- Show top 10 event categories
+SELECT eventcode,
+	       gdelt.eventcodes.description,
+	       nb_events
+	FROM (SELECT gdelt.events.eventcode,
+	             COUNT(gdelt.events.globaleventid) AS nb_events
+	      FROM gdelt.events
+	      GROUP BY gdelt.events.eventcode
+	      ORDER BY nb_events DESC LIMIT 10)
+	  JOIN gdelt.eventcodes ON eventcode = gdelt.eventcodes.code
+	ORDER BY nb_events DESC;
+
+Output:
+
+ 
+
+18.	Count US President Obama events per year:
+
+
+	-- Count Obama events per year
+SELECT year,
+	       COUNT(globaleventid) AS nb_events
+	FROM gdelt.events
+	WHERE actor1name='BARACK OBAMA'
+	GROUP BY year
+	ORDER BY year ASC;
+
+
+
+Output:
+ 
+
+19.	Count Obama/Putin events per category
+
+
+
+	-- Count Obama/Putin events per category
+SELECT eventcode,
+	       gdelt.eventcodes.description,
+	       nb_events
+	FROM (SELECT gdelt.events.eventcode,
+	             COUNT(gdelt.events.globaleventid) AS nb_events
+	      FROM gdelt.events
+	      WHERE actor1name='BARACK OBAMA'and actor2name='VLADIMIR PUTIN'
+	      GROUP BY gdelt.events.eventcode
+	      ORDER BY nb_events DESC)
+	  JOIN gdelt.eventcodes ON eventcode = gdelt.eventcodes.code
+	  WHERE nb_events >= 50
+	ORDER BY nb_events DESC;
+	
+
+
+Output:
+ 
+
+20.	None of these took more than 30 seconds and that's with uncompressed CSV, the least performing data format possible. Converting the data set columnar formats such as Parquet would yield a massive improvement
+
+
+
+
+
+
+Lab 2.6 Working with Redshift
+
+Now you will use Redshift to to query a different dataset. We will import a flights dataset to query.
+
+1.	Navigate to the IAM console
+
+2.	In the navigation pane, choose Roles
+
+3.	Choose Create role
+
+4.	In the AWS Service group, choose Redshift
+
+5.	Under Select your use case, choose Redshift - Customizable then choose Next: Permissions
+
+6.	On the Attach permissions policies page, choose AmazonS3ReadOnlyAccess. You can leave the default setting for Set permissions boundary. Then choose Next: Tags
+
+7.	The Add tags page appears. You can optionally add tags. Choose Next: Review
+
+8.	For Role name, type a name for your role. For this tutorial, type myRedshiftRole
+
+9.	Review the information, and then choose Create Role
+
+10.	Choose the role name of the role you just created.
+
+11.	Copy the Role ARN to your clipboard—this value is the Amazon Resource Name (ARN) for the role that you just created. You use that value when you use the COPY command to load data in the next steps.
+
+12.	Navigate to Redshift in the console 
+
+13.	Click Quick Launch Cluster
+
+14.	Set the Master user password and and select the IAM role you have created in the previous step. Then click Launch Cluster. Launching the cluster will take a few minutes
+
+15.	Once the cluster has launched, navigate to the Query Editor and enter the credentials that you have set just earlier.
+
+
+
+
+ 
+
+16.	Enter the following command to create a table to hold the flights data
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+17.	Then enter the following command to import data into your Redshift cluster. Important! You will need to replace the IAM_ROLE with the Role ARN you have copied earlier.
+
+
+
+
+
+
+
+
+
+18.	 Now you are ready to query the data. Try using the following commands to query the data. Feel free to try your own commands.
+
+a.	Get the number of rows in the flights table
+
+SELECT COUNT(*) FROM flights;
+
+b.	Query 25 random rows of data
+
+SELECT * FROM flights ORDER BY random() LIMIT 25;
+
+c.	Top 10 airlines by the number of departures
+
+SELECT carrier, SUM (departures) FROM flights GROUP BY carrier ORDER BY 2 DESC LIMIT 10;
+
+19.	Enter the following command to create a table to hold the aircraft data
+
+
+
+
+
+
+20.	Then enter the following command to import aircraft into your Redshift cluster. Important! You will need to replace the IAM_ROLE with the Role ARN you have copied earlier.
+
+
+
+
+
+
+
+
+
+
+21.	Enter the following command verify that the data import was completed successfully and to view 10 rows of aircraft data
+
+SELECT * FROM aircraft ORDER BY random() LIMIT 10;
+
+
+
+
+
+
+22.	You can now join the two tables you have created. Try the following command to query fort he most-flown types of aircraft
+
+
+
+
+
+
+
+
+
+
+23.	Try the following query to see the compression rate of each column in the flights table
+
+ANALYZE COMPRESSION flights;
+
+24.	Enter the following command to create a table to hold the airport data
+
+
+
+
+
+
+25.	Then enter the following command to import airport data into your Redshift cluster. Important! You will need to replace the IAM_ROLE with the Role ARN you have copied earlier.
+
+
+
+
+
+
+
+
+
+
+26.	Now try running the following query to create a new table about Las Vegas flights
+
+
+
+
+
+
+
+
+
+27.	Run the following query discover where the most popular flights to Las Vegas originate
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
