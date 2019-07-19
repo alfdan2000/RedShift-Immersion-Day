@@ -4,7 +4,7 @@ Lab 2.4 Working with a 170GB Public Dataset (Global DB of Events, Language & Ton
 
 In the previous labs, you worked with an extremly small dataset (less than < 10MB) and with a single data source. In this lab, let’s use a public dataset with bigger size and more tables and observe various services. 
 
-  
+![GDelt Project image](https://csaimmersiondaymaterial.s3-us-west-2.amazonaws.com/gdelt+project.png)
 
 
 The Global Database of Events, Language and Tone (GDELT) Project monitors the world's broadcast, print, and web news from nearly every corner of every country in over 100 languages and identifies the people, locations, organisations, counts, themes, sources, emotions, counts, quotes, images and events driving our global society every second of every day. The data set v1.0 is publicly available in S3 in the Registry of Open Data on AWS.
