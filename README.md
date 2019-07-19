@@ -7,10 +7,10 @@ In the previous labs, you worked with an extremly small dataset (less than < 10M
 ![GDelt Project image](https://csaimmersiondaymaterial.s3-us-west-2.amazonaws.com/gdelt+project.png)
 
 
-The Global Database of Events, Language and Tone (GDELT) Project monitors the world's broadcast, print, and web news from nearly every corner of every country in over 100 languages and identifies the people, locations, organisations, counts, themes, sources, emotions, counts, quotes, images and events driving our global society every second of every day. The data set v1.0 is publicly available in S3 in the Registry of Open Data on AWS.
+The [Global Database of Events, Language and Tone (GDELT) Project](http://www.gdeltproject.org/) monitors the world's broadcast, print, and web news from nearly every corner of every country in over 100 languages and identifies the people, locations, organisations, counts, themes, sources, emotions, counts, quotes, images and events driving our global society every second of every day. The data set v1.0 is publicly available in S3 in the [Registry of Open Data on AWS](https://aws.amazon.com/public-datasets/gdelt/).
 
 In this lab, you will explore, catalogue, visualize, interact with this data using AWS services.
-The data set we will use contains (at the time to writing) thousands of uncompressed CSV files: hundreds of millions of lines, and is about 170GB. The Data format is defined here. The queries below are from Julien Simon’s blog.
+The data set we will use contains (at the time to writing) thousands of uncompressed CSV files: hundreds of millions of lines, and is about 170GB. The Data format is defined [here](http://data.gdeltproject.org/documentation/GDELT-Data_Format_Codebook.pdf). The queries below are from Julien Simon’s blog.
 
 
 
@@ -19,9 +19,9 @@ You will use Athena to define columns you needed with the right type and point t
 1.	Navigate to Athena in the console 
 
 2.	Enter the following HIVE DDL statement to create a database in glue metadata store
-
-
+```
 CREATE DATABASE gdelt;
+```
 
 
 3.	Create a Table referring to the S3 bucket holding all files in the AWS account.
