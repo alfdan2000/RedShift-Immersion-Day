@@ -27,11 +27,11 @@ CREATE DATABASE gdelt;
 
 
 3.	Create a Table referring to the S3 bucket holding all files in the AWS account.
-a.	Before we proceed, a few remarks:
-i.	We are creating a schema definition in our Glue service, in our Data Catalogue
-ii.	The actual data is in another AWS account
-iii.	You can Access this data, because it is a public dataset located in 's3://gdelt-open-data/events/folder, and is open to everyone.
-iv.	Although we are creating TABLEs, there is no database. The events table is a representation of thousands of TSV (Tab Seperated Files) files stored in S3. Technologies like Apache HIVE and Presto enables accessing them using SQL like expressions.
+	a.	Before we proceed, a few remarks:
+		i.	We are creating a schema definition in our Glue service, in our Data Catalogue
+		ii.	The actual data is in another AWS account
+		iii.	You can Access this data, because it is a public dataset located in 's3://gdelt-open-data/events/folder, and is open to everyone.
+		iv.	Although we are creating TABLEs, there is no database. The events table is a representation of thousands of TSV (Tab Seperated Files) files stored in S3. Technologies like Apache HIVE and Presto enables accessing them using SQL like expressions.
 
 ```
 CREATE EXTERNAL TABLE IF NOT EXISTS gdelt.events (
@@ -101,7 +101,7 @@ WITH SERDEPROPERTIES (
 
 4.	Create lookup tables.
 	a.	There are a few tables in the GDELT dataset, and they provide human-friendly descriptions to event codes and country codes in the events table defined in the previous step. They are also TSV files stored in S3.
-		i.	The Countries file that will be used as a lookup table looks like below: [https://www.gdeltproject.org/data/lookups/CAMEO.country.txt](https://www.gdeltproject.org/data/lookups/CAMEO.country.txt)
+		i.	The Countries file that will be used as a lookup table looks like below: [](https://www.gdeltproject.org/data/lookups/CAMEO.country.txt)
 
 ![country files image](https://csaimmersiondaymaterial.s3-us-west-2.amazonaws.com/country+files.png =50x) 
 
