@@ -1,7 +1,6 @@
 # RedShift-Immersion-Day
 
 ## Lab 2.4 
-
 ## Working with a 170GB Public Dataset (Global DB of Events, Language & Tone)
 
 In the previous labs, you worked with an extremly small dataset (less than < 10MB) and with a single data source. In this lab, let’s use a public dataset with bigger size and more tables and observe various services. 
@@ -33,7 +32,7 @@ CREATE DATABASE gdelt;
 <ol type="i">
 <li>We are creating a schema definition in our Glue service, in our Data Catalogue</li>
 <li>The actual data is in another AWS account</li>
-<li>You can Access this data, because it is a public dataset located in 's3://gdelt-open-data/events/folder, and is open to everyone.</li>
+<li>You can Access this data, because it is a public dataset located in 's3://gdelt-open-data/events/folder', and is open to everyone.</li>
 <li>Although we are creating TABLEs, there is no database. The events table is a representation of thousands of TSV (Tab Seperated Files) files stored in S3. Technologies like Apache HIVE and Presto enables accessing them using SQL like expressions.</li>
 </ol type="i">
 </ol type="A">
@@ -111,19 +110,19 @@ WITH SERDEPROPERTIES (
 <li>There are a few tables in the GDELT dataset, and they provide human-friendly descriptions to event codes and country codes in the events table defined in the previous step. They are also TSV files stored in S3.</li>
 
 <ol type="i">
-<li>The **Countries** file that will be used as a lookup table looks like below: https://www.gdeltproject.org/data/lookups/CAMEO.country.txt</li>
+<li>The <b><i>Countries</i></b> file that will be used as a lookup table looks like below: https://www.gdeltproject.org/data/lookups/CAMEO.country.txt</li>
 
 ![country files image](https://csaimmersiondaymaterial.s3-us-west-2.amazonaws.com/country+files.png) 
 
-<li>The EventCodes file that will be used as a lookup table looks like below:  [https://www.gdeltproject.org/data/lookups/CAMEO.eventcodes.txt](https://www.gdeltproject.org/data/lookups/CAMEO.eventcodes.txt)</li>
+<li>The <b><i>EventCodes</b></i> file that will be used as a lookup table looks like below: https://www.gdeltproject.org/data/lookups/CAMEO.eventcodes.txt</li>
 
 ![Event code image](https://csaimmersiondaymaterial.s3-us-west-2.amazonaws.com/event+codes.png) 
 
-<li>The Groups file that will be used as a lookup table looks like below:</li>
+<li>The <b><i>Groups</b></i> file that will be used as a lookup table looks like below:</li>
  
 ![Group file image](https://csaimmersiondaymaterial.s3-us-west-2.amazonaws.com/group+files.png)
 
-<li>The Types file that will be used as a lookup table looks like below:</li>
+<li>The <b><i>Types</b></i> file that will be used as a lookup table looks like below:</li>
 
 ![Type file Image](https://csaimmersiondaymaterial.s3-us-west-2.amazonaws.com/type+files.png) 
 </ol type="i">
@@ -133,10 +132,10 @@ WITH SERDEPROPERTIES (
 
 <li>First, download the files below to your computer:</li>
 <ol type="A">
-<li>Eventcodes: [](https://www.gdeltproject.org/data/lookups/CAMEO.eventcodes.txt)</li>
-<li>Countries: [](https://www.gdeltproject.org/data/lookups/CAMEO.country.txt)</li>
-<li>Types: [](https://www.gdeltproject.org/data/lookups/CAMEO.type.txt)</li>
-<li>Groups: [](https://www.gdeltproject.org/data/lookups/CAMEO.knowngroup.txt)</li>
+<li>Eventcodes: https://www.gdeltproject.org/data/lookups/CAMEO.eventcodes.txt</li>
+<li>Countries: https://www.gdeltproject.org/data/lookups/CAMEO.country.txt</li>
+<li>Types: https://www.gdeltproject.org/data/lookups/CAMEO.type.txt</li>
+<li>Groups: https://www.gdeltproject.org/data/lookups/CAMEO.knowngroup.txt</li>
 </ol type="A">
 
 
@@ -144,27 +143,27 @@ WITH SERDEPROPERTIES (
 
 <li>Open your bucket and create the following 4 folders (all lowercase)</li>
 <ol type="A">
-<li>Folder 1: 	countries</li>
-<li>Folder 2: 	eventcodes</li>
-<li>Folder 3: 	groups </li>
-<li>Folder 4: 	types</li>
+<li>Folder 1: 	<b><i>countries</b></i></li>
+<li>Folder 2: 	<b><i>eventcodes</b></i></li>
+<li>Folder 3: 	<b><i>groups</b></i></li>
+<li>Folder 4: 	<b><i>types</b></i></li>
 </ol type="A">
 
 ![Folders images](https://csaimmersiondaymaterial.s3-us-west-2.amazonaws.com/folders.png)
 
 <li>Put the corresponding file under each bucket (e.g. </li>
 <ol type="A">
-<li>Upload CAMEO.eventcodes.txt file from your computer under eventcodes</li>
-<li>Upload CAMEO. countries.txt file from your computer under countries</li>
-<li>Upload CAMEO. groups.txt file from your computer under groups</li>
-<li>Upload CAMEO. types.txt file from your computer under types</li>
+<li>Upload <b><i>CAMEO.eventcodes.txt</b></i> file from your computer under <b><i>eventcodes</b></i></li>
+<li>Upload <b><i>CAMEO. countries.txt</b></i> file from your computer under <b><i>countries</b></i></li>
+<li>Upload <b><i>CAMEO. groups.txt</b></i> file from your computer under <b><i>groups</b></i></li>
+<li>Upload <b><i>CAMEO. types.txt</b></i> file from your computer under <b><i>types</b></i></li>
 </ol type="A">
 
 <li>Navigate to your Athena Console. You will now add the files to your data catalogue</li>
 
-<li>Run the following DDL statements from the Athena Console for the lookup tables. Important: Replace YOURINITIALS in bucket name before running the DDL.</li>
+<li>Run the following DDL statements from the Athena Console for the lookup tables. <b><i><u>Important:</u></b></i> Replace YOURINITIALS in bucket name before running the DDL.</li>
 
-<li>Add eventcodes to the data catalogue by pasting the DDL below to Athena Console, replacing your initials and selecting “Run Query”</li>
+<li>Add <b><i>eventcodes</b></i> to the data catalogue by pasting the DDL below to Athena Console, replacing your initials and selecting “Run Query”</li>
 
 ```
 CREATE EXTERNAL TABLE IF NOT EXISTS gdelt.eventcodes (
@@ -178,7 +177,7 @@ LOCATION 's3://<your initials + two digit number>-tame-bda-immersion/eventcodes'
 TBLPROPERTIES ( "skip.header.line.count"="1")
 ```
 
-<li>Add types to the data catalogue by pasting the DDL below to Athena Console, replacing your initials and selecting “Run Query”</li>
+<li>Add <b><i>types</b></i> to the data catalogue by pasting the DDL below to Athena Console, replacing your initials and selecting “Run Query”</li>
 
 ```
 CREATE EXTERNAL TABLE IF NOT EXISTS gdelt.types (
@@ -192,7 +191,7 @@ LOCATION 's3://<your initials + two digit number>-tame-bda-immersion/types/'
 TBLPROPERTIES ( "skip.header.line.count"="1");
 ```
 
-<li>Add groups to the data catalogue by pasting the DDL below to Athena Console, replacing your initials and selecting “Run Query”</li>
+<li>Add <b><i>groups</b></i> to the data catalogue by pasting the DDL below to Athena Console, replacing your initials and selecting “Run Query”</li>
 
 ```
 CREATE EXTERNAL TABLE IF NOT EXISTS gdelt.groups (
@@ -206,7 +205,7 @@ LOCATION 's3://<your initials + two digit number>-tame-bda-immersion/groups/'
 TBLPROPERTIES ( "skip.header.line.count"="1");
 ```
 
-<li>Add countries to the data catalogue by pasting the DDL below to Athena Console, replacing your initials and selecting “Run Query”</li>
+<li>Add <b><i>countries</b></i> to the data catalogue by pasting the DDL below to Athena Console, replacing your initials and selecting “Run Query”</li>
 
 ```
 CREATE EXTERNAL TABLE IF NOT EXISTS gdelt.countries (
@@ -222,7 +221,7 @@ TBLPROPERTIES ( "skip.header.line.count"="1");
 
 <li>Now lets explore the data with the queries below. </li>
 <ol type="A">
-<li>First find the number of events per year from the Events table</li>
+<li>First find the number of events per year from the <b><i>Events</b></i> table</li>
 </ol type="A">
 
 ```
@@ -300,26 +299,26 @@ Output:
 
 
 
-Lab 2.6 Working with Redshift
+## Lab 2.6 Working with Redshift
 
 Now you will use Redshift to to query a different dataset. We will import a flights dataset to query.
 
 <ol type="1">
-<li>Navigate to the IAM console</li>
-<li>In the navigation pane, choose Roles</li>
-<li>Choose Create role</li>
-<li>In the AWS Service group, choose Redshift</li>
-<li>Under Select your use case, choose Redshift - Customizable then choose Next: Permissions</li>
-<li>On the Attach permissions policies page, choose AmazonS3ReadOnlyAccess. You can leave the default setting for Set permissions boundary. Then choose Next: Tags</li>
-<li>The Add tags page appears. You can optionally add tags. Choose Next: Review</li>
-<li>For Role name, type a name for your role. For this tutorial, type myRedshiftRole</li>
-<li>Review the information, and then choose Create Role</li>
+<li>Navigate to the <b><i>IAM</b></i> console</li>
+<li>In the navigation pane, choose <b><i>Roles</b></i></li>
+<li>Choose <b><i>Create role</b></i></li>
+<li>In the AWS Service group, choose <b><i>Redshift</b></i></li>
+<li>Under Select your use case, choose <b><i>Redshift - Customizable</b></i> then choose <b><i>Next: Permissions</b></i></li>
+<li>On the Attach permissions policies page, choose <b><i>AmazonS3ReadOnlyAccess</b></i>. You can leave the default setting for Set permissions boundary. Then choose <b><i>Next: Tags</b></i></li>
+<li>The Add tags page appears. You can optionally add tags. Choose <b><i>Next: Review</b></i></li>
+<li>For Role name, type a name for your role. For this tutorial, type <b><i>myRedshiftRole</b></i></li>
+<li>Review the information, and then choose <b><i>Create Role</b></i></li>
 <li>Choose the role name of the role you just created.</li>
 <li>Copy the Role ARN to your clipboard—this value is the Amazon Resource Name (ARN) for the role that you just created. You use that value when you use the COPY command to load data in the next steps.</li>
 <li>Navigate to Redshift in the console </li>
-<li>Click Quick Launch Cluster</li>
-<li>Set the Master user password and and select the IAM role you have created in the previous step. Then click Launch Cluster. Launching the cluster will take a few minutes</li>
-<li>Once the cluster has launched, navigate to the Query Editor and enter the credentials that you have set just earlier.</li>
+<li>Click <b><i>Quick Launch Cluster</b></i></li>
+<li>Set the <b><i>Master user password</b></i> and and select the IAM role you have created in the previous step. Then click <b><i>Launch Cluster</b></i>. Launching the cluster will take a few minutes</li>
+<li>Once the cluster has launched, navigate to the <b><i>Query Editor</b></i> and enter the credentials that you have set just earlier.</li>
 	
 ![Credentials Image](https://csaimmersiondaymaterial.s3-us-west-2.amazonaws.com/credentials.png) 
 
@@ -343,7 +342,7 @@ CREATE TABLE flights (
 );
 ```
 
-<li>Then enter the following command to import data into your Redshift cluster. Important! You will need to replace the IAM_ROLE with the Role ARN you have copied earlier.</li>
+<li>Then enter the following command to import data into your Redshift cluster. <b><i><u>Important!</b></i></u> You will need to replace the IAM_ROLE with the Role ARN you have copied earlier.</li>
 
 ```
 COPY flights
@@ -387,7 +386,7 @@ CREATE TABLE aircraft (
 );
 ```
 
-<li>Then enter the following command to import aircraft into your Redshift cluster. Important! You will need to replace the IAM_ROLE with the Role ARN you have copied earlier.</li>
+<li>Then enter the following command to import aircraft into your Redshift cluster. <b><i><u>Important!</b></i></u> You will need to replace the IAM_ROLE with the Role ARN you have copied earlier.</li>
 
 ```
 COPY aircraft
@@ -433,7 +432,7 @@ CREATE TABLE airports (
 );
 ```
 
-<li>Then enter the following command to import airport data into your Redshift cluster. Important! You will need to replace the IAM_ROLE with the Role ARN you have copied earlier.</li>
+<li>Then enter the following command to import airport data into your Redshift cluster. <b><i><u>Important!</b></i></u> You will need to replace the <b><i>IAM_ROLE</i></b> with the Role ARN you have copied earlier.</li>
 
 ```
 COPY airports
@@ -472,19 +471,3 @@ ORDER BY SUM(passengers) desc
 LIMIT 10;
 ```
 </ol type="1">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
