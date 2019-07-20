@@ -1,8 +1,8 @@
 # RedShift-Immersion-Day
 
-Lab 2.4 
+## Lab 2.4 
 
-Working with a 170GB Public Dataset (Global DB of Events, Language & Tone)
+## Working with a 170GB Public Dataset (Global DB of Events, Language & Tone)
 
 In the previous labs, you worked with an extremly small dataset (less than < 10MB) and with a single data source. In this lab, let’s use a public dataset with bigger size and more tables and observe various services. 
 
@@ -111,7 +111,7 @@ WITH SERDEPROPERTIES (
 <li>There are a few tables in the GDELT dataset, and they provide human-friendly descriptions to event codes and country codes in the events table defined in the previous step. They are also TSV files stored in S3.</li>
 
 <ol type="i">
-<li>The Countries file that will be used as a lookup table looks like below: [](https://www.gdeltproject.org/data/lookups/CAMEO.country.txt)</li>
+<li>The **Countries** file that will be used as a lookup table looks like below: [](https://www.gdeltproject.org/data/lookups/CAMEO.country.txt)</li>
 
 ![country files image](https://csaimmersiondaymaterial.s3-us-west-2.amazonaws.com/country+files.png) 
 
