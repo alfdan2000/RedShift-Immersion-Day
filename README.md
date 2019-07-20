@@ -1,6 +1,8 @@
 # RedShift-Immersion-Day
 
-Lab 2.4 Working with a 170GB Public Dataset (Global DB of Events, Language & Tone)
+Lab 2.4 
+
+Working with a 170GB Public Dataset (Global DB of Events, Language & Tone)
 
 In the previous labs, you worked with an extremly small dataset (less than < 10MB) and with a single data source. In this lab, let’s use a public dataset with bigger size and more tables and observe various services. 
 
