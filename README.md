@@ -101,7 +101,7 @@ WITH SERDEPROPERTIES (
 a.	There are a few tables in the GDELT dataset, and they provide human-friendly descriptions to event codes and country codes in the events table defined in the previous step. They are also TSV files stored in S3.
 i.	The Countries file that will be used as a lookup table looks like below: [https://www.gdeltproject.org/data/lookups/CAMEO.country.txt](https://www.gdeltproject.org/data/lookups/CAMEO.country.txt)
 
-![country files image](https://csaimmersiondaymaterial.s3-us-west-2.amazonaws.com/country+files.png | width=50) 
+![country files image](https://csaimmersiondaymaterial.s3-us-west-2.amazonaws.com/country+files.png =250x250) 
 
 ii.	The EventCodes file that will be used as a lookup table looks like below:  [https://www.gdeltproject.org/data/lookups/CAMEO.eventcodes.txt](https://www.gdeltproject.org/data/lookups/CAMEO.eventcodes.txt)
 
