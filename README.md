@@ -18,7 +18,9 @@ The data set we will use contains (at the time to writing) thousands of uncompre
 
 You will use Athena to define columns you needed with the right type and point to the S3 bucket holding all files (in another AWS account). Athena will also be used in later labs to query data hosted in S3. 
 
-1.	Navigate to Athena in the console 
+<ol type="I">
+<li>Navigate to Athena in the console 
+</ol>
 
 2.	Enter the following HIVE DDL statement to create a database in glue metadata store
 ```
