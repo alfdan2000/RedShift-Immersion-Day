@@ -126,38 +126,45 @@ WITH SERDEPROPERTIES (
 <li>The Types file that will be used as a lookup table looks like below:</li>
 
 ![Type file Image](https://csaimmersiondaymaterial.s3-us-west-2.amazonaws.com/type+files.png) 
+</ol type="i">
 
-	b.	To maket his exercise interesting, you will store these files in your S3 bucket. The Events table and the lookup tables will be used in a few queries using Athena. 
+<li>To maket his exercise interesting, you will store these files in your S3 bucket. The Events table and the lookup tables will be used in a few queries using Athena. </li>
+</ol type="A">
 
-5.	First, download the files below to your computer:
-	a.	Eventcodes: [](https://www.gdeltproject.org/data/lookups/CAMEO.eventcodes.txt)
-	b.	Countries: [](https://www.gdeltproject.org/data/lookups/CAMEO.country.txt)
-	c.	Types: [](https://www.gdeltproject.org/data/lookups/CAMEO.type.txt)
-	d.	Groups: [](https://www.gdeltproject.org/data/lookups/CAMEO.knowngroup.txt)
+<li>First, download the files below to your computer:</li>
+<ol type="A">
+<li>Eventcodes: [](https://www.gdeltproject.org/data/lookups/CAMEO.eventcodes.txt)</li>
+<li>Countries: [](https://www.gdeltproject.org/data/lookups/CAMEO.country.txt)</li>
+<li>Types: [](https://www.gdeltproject.org/data/lookups/CAMEO.type.txt)</li>
+<li>Groups: [](https://www.gdeltproject.org/data/lookups/CAMEO.knowngroup.txt)</li>
+</ol type="A">
 
 
+<li>Navigate to S3 in your console. We will reuse the S3 bucket that was created in the previous lab.</li>
 
-6.	Navigate to S3 in your console. We will reuse the S3 bucket that was created in the previous lab.
-
-7.	Open your bucket and create the following 4 folders (all lowercase)
-	a.	Folder 1: 	countries
-	b.	Folder 2: 	eventcodes
-	c.	Folder 3: 	groups 
-	d.	Folder 4: 	types
+<li>Open your bucket and create the following 4 folders (all lowercase)</li>
+<ol type="A">
+<li>Folder 1: 	countries</li>
+<li>Folder 2: 	eventcodes</li>
+<li>Folder 3: 	groups </li>
+<li>Folder 4: 	types</li>
+</ol type="A">
 
 ![Folders images](https://csaimmersiondaymaterial.s3-us-west-2.amazonaws.com/folders.png)
 
-8.	Put the corresponding file under each bucket (e.g. 
-	a.	Upload CAMEO.eventcodes.txt file from your computer under eventcodes
-	b.	Upload CAMEO. countries.txt file from your computer under countries
-	c.	Upload CAMEO. groups.txt file from your computer under groups
-	d.	Upload CAMEO. types.txt file from your computer under types
+<li>Put the corresponding file under each bucket (e.g. </li>
+<ol type="A">
+<li>Upload CAMEO.eventcodes.txt file from your computer under eventcodes</li>
+<li>Upload CAMEO. countries.txt file from your computer under countries</li>
+<li>Upload CAMEO. groups.txt file from your computer under groups</li>
+<li>Upload CAMEO. types.txt file from your computer under types</li>
+</ol type="A">
 
-9.	Navigate to your Athena Console. You will now add the files to your data catalogue
+<li>Navigate to your Athena Console. You will now add the files to your data catalogue</li>
 
-10.	Run the following DDL statements from the Athena Console for the lookup tables. Important: Replace YOURINITIALS in bucket name before running the DDL.
+<li>Run the following DDL statements from the Athena Console for the lookup tables. Important: Replace YOURINITIALS in bucket name before running the DDL.</li>
 
-11.	Add eventcodes to the data catalogue by pasting the DDL below to Athena Console, replacing your initials and selecting “Run Query”
+<li>Add eventcodes to the data catalogue by pasting the DDL below to Athena Console, replacing your initials and selecting “Run Query”</li>
 
 ```
 CREATE EXTERNAL TABLE IF NOT EXISTS gdelt.eventcodes (
@@ -171,7 +178,7 @@ LOCATION 's3://<your initials + two digit number>-tame-bda-immersion/eventcodes'
 TBLPROPERTIES ( "skip.header.line.count"="1")
 ```
 
-12.	Add types to the data catalogue by pasting the DDL below to Athena Console, replacing your initials and selecting “Run Query”
+<li>Add types to the data catalogue by pasting the DDL below to Athena Console, replacing your initials and selecting “Run Query”</li>
 
 ```
 CREATE EXTERNAL TABLE IF NOT EXISTS gdelt.types (
@@ -185,7 +192,7 @@ LOCATION 's3://<your initials + two digit number>-tame-bda-immersion/types/'
 TBLPROPERTIES ( "skip.header.line.count"="1");
 ```
 
-13.	Add groups to the data catalogue by pasting the DDL below to Athena Console, replacing your initials and selecting “Run Query”
+<li>Add groups to the data catalogue by pasting the DDL below to Athena Console, replacing your initials and selecting “Run Query”</li>
 
 ```
 CREATE EXTERNAL TABLE IF NOT EXISTS gdelt.groups (
@@ -199,7 +206,7 @@ LOCATION 's3://<your initials + two digit number>-tame-bda-immersion/groups/'
 TBLPROPERTIES ( "skip.header.line.count"="1");
 ```
 
-14.	Add countries to the data catalogue by pasting the DDL below to Athena Console, replacing your initials and selecting “Run Query”
+<li>Add countries to the data catalogue by pasting the DDL below to Athena Console, replacing your initials and selecting “Run Query”</li>
 
 ```
 CREATE EXTERNAL TABLE IF NOT EXISTS gdelt.countries (
@@ -213,8 +220,10 @@ LOCATION 's3://<your initials + two digit number>-tame-bda-immersion/countries/'
 TBLPROPERTIES ( "skip.header.line.count"="1");
 ```
 
-15.	Now lets explore the data with the queries below. 
-	a.	First find the number of events per year from the Events table
+<li>Now lets explore the data with the queries below. </li>
+<ol type="A">
+<li>First find the number of events per year from the Events table</li>
+</ol type="A">
 
 ```
 	-- Find the number of events per year
@@ -228,9 +237,9 @@ SELECT year,
 Output:
 ![output 1 image](https://csaimmersiondaymaterial.s3-us-west-2.amazonaws.com/output.png)
 
-16.	Notice the data amount scanned? The results are returned in less than 30 seconds by scanning 175 GB of data from thousands of uncompressed CSV files on S3. That’s the power of HIVE, Presto and other Hadoop Technologies simplified by Athena Service.
+<li>Notice the data amount scanned? The results are returned in less than 30 seconds by scanning 175 GB of data from thousands of uncompressed CSV files on S3. That’s the power of HIVE, Presto and other Hadoop Technologies simplified by Athena Service.</li>
 
-17.	Now let’s show the sorted top 10 event categories by joining Events table and the Eventcode lookup table:
+<li>Now let’s show the sorted top 10 event categories by joining Events table and the Eventcode lookup table:</li>
 
 ```
 	-- Show top 10 event categories
@@ -250,7 +259,7 @@ Output:
 ![output 2 image](https://csaimmersiondaymaterial.s3-us-west-2.amazonaws.com/output+2.png)
  
 
-18.	Count US President Obama events per year:
+<li>Count US President Obama events per year:</li>
 
 ```
 	-- Count Obama events per year
@@ -265,7 +274,7 @@ SELECT year,
 Output:
 ![output 3 image](https://csaimmersiondaymaterial.s3-us-west-2.amazonaws.com/output+3.png)
 
-19.	Count Obama/Putin events per category
+<li>Count Obama/Putin events per category</li>
 
 ```
 	-- Count Obama/Putin events per category
@@ -286,8 +295,8 @@ SELECT eventcode,
 Output:
 ![output 4 image](https://csaimmersiondaymaterial.s3-us-west-2.amazonaws.com/output+4.png)
 
-20.	None of these took more than 30 seconds and that's with uncompressed CSV, the least performing data format possible. Converting the data set columnar formats such as Parquet would yield a massive improvement
-
+<li>None of these took more than 30 seconds and that's with uncompressed CSV, the least performing data format possible. Converting the data set columnar formats such as Parquet would yield a massive improvement</li>
+</ol type="1">
 
 
 
