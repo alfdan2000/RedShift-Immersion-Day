@@ -304,38 +304,26 @@ Lab 2.6 Working with Redshift
 
 Now you will use Redshift to to query a different dataset. We will import a flights dataset to query.
 
-1.	Navigate to the IAM console
-
-2.	In the navigation pane, choose Roles
-
-3.	Choose Create role
-
-4.	In the AWS Service group, choose Redshift
-
-5.	Under Select your use case, choose Redshift - Customizable then choose Next: Permissions
-
-6.	On the Attach permissions policies page, choose AmazonS3ReadOnlyAccess. You can leave the default setting for Set permissions boundary. Then choose Next: Tags
-
-7.	The Add tags page appears. You can optionally add tags. Choose Next: Review
-
-8.	For Role name, type a name for your role. For this tutorial, type myRedshiftRole
-
-9.	Review the information, and then choose Create Role
-
-10.	Choose the role name of the role you just created.
-
-11.	Copy the Role ARN to your clipboard—this value is the Amazon Resource Name (ARN) for the role that you just created. You use that value when you use the COPY command to load data in the next steps.
-
-12.	Navigate to Redshift in the console 
-
-13.	Click Quick Launch Cluster
-
-14.	Set the Master user password and and select the IAM role you have created in the previous step. Then click Launch Cluster. Launching the cluster will take a few minutes
-
-15.	Once the cluster has launched, navigate to the Query Editor and enter the credentials that you have set just earlier.
+<ol type="1">
+<li>Navigate to the IAM console</li>
+<li>In the navigation pane, choose Roles</li>
+<li>Choose Create role</li>
+<li>In the AWS Service group, choose Redshift</li>
+<li>Under Select your use case, choose Redshift - Customizable then choose Next: Permissions</li>
+<li>On the Attach permissions policies page, choose AmazonS3ReadOnlyAccess. You can leave the default setting for Set permissions boundary. Then choose Next: Tags</li>
+<li>The Add tags page appears. You can optionally add tags. Choose Next: Review</li>
+<li>For Role name, type a name for your role. For this tutorial, type myRedshiftRole</li>
+<li>Review the information, and then choose Create Role</li>
+<li>Choose the role name of the role you just created.</li>
+<li>Copy the Role ARN to your clipboard—this value is the Amazon Resource Name (ARN) for the role that you just created. You use that value when you use the COPY command to load data in the next steps.</li>
+<li>Navigate to Redshift in the console </li>
+<li>Click Quick Launch Cluster</li>
+<li>Set the Master user password and and select the IAM role you have created in the previous step. Then click Launch Cluster. Launching the cluster will take a few minutes</li>
+<li>Once the cluster has launched, navigate to the Query Editor and enter the credentials that you have set just earlier.</li>
+	
 ![Credentials Image](https://csaimmersiondaymaterial.s3-us-west-2.amazonaws.com/credentials.png) 
 
-16.	Enter the following command to create a table to hold the flights data
+<li>Enter the following command to create a table to hold the flights data</li>
 
 ```
 CREATE TABLE flights (
@@ -355,7 +343,7 @@ CREATE TABLE flights (
 );
 ```
 
-17.	Then enter the following command to import data into your Redshift cluster. Important! You will need to replace the IAM_ROLE with the Role ARN you have copied earlier.
+<li>Then enter the following command to import data into your Redshift cluster. Important! You will need to replace the IAM_ROLE with the Role ARN you have copied earlier.</li>
 
 ```
 COPY flights
@@ -367,21 +355,22 @@ REMOVEQUOTES
 REGION 'us-east-1';
 ```
 
-18.	 Now you are ready to query the data. Try using the following commands to query the data. Feel free to try your own commands.
-
-	a.	Get the number of rows in the flights table
-
+<li>Now you are ready to query the data. Try using the following commands to query the data. Feel free to try your own commands.</li>
+<ol type="A">
+<li>Get the number of rows in the flights table</li>
+```
 SELECT COUNT(*) FROM flights;
-
-	b.	Query 25 random rows of data
-
+```
+<li>Query 25 random rows of data</li>
+```
 SELECT * FROM flights ORDER BY random() LIMIT 25;
-
-	c.	Top 10 airlines by the number of departures
-
+```
+<li>Top 10 airlines by the number of departures</li>
+</ol type="A">
+```
 SELECT carrier, SUM (departures) FROM flights GROUP BY carrier ORDER BY 2 DESC LIMIT 10;
-
-19.	Enter the following command to create a table to hold the aircraft data
+```
+<li>Enter the following command to create a table to hold the aircraft data</li>
 
 ```
 CREATE TABLE aircraft (
@@ -390,7 +379,7 @@ CREATE TABLE aircraft (
 );
 ```
 
-20.	Then enter the following command to import aircraft into your Redshift cluster. Important! You will need to replace the IAM_ROLE with the Role ARN you have copied earlier.
+<li>Then enter the following command to import aircraft into your Redshift cluster. Important! You will need to replace the IAM_ROLE with the Role ARN you have copied earlier.</li>
 
 ```
 COPY aircraft
@@ -402,13 +391,13 @@ REMOVEQUOTES
 REGION 'us-east-1';
 ```
 
-21.	Enter the following command verify that the data import was completed successfully and to view 10 rows of aircraft data
+<li>Enter the following command verify that the data import was completed successfully and to view 10 rows of aircraft data</li>
 
 ```
 SELECT * FROM aircraft ORDER BY random() LIMIT 10;
 ```
 
-22.	You can now join the two tables you have created. Try the following command to query fort he most-flown types of aircraft
+<li>You can now join the two tables you have created. Try the following command to query fort he most-flown types of aircraft</li>
 
 ```
 SELECT
@@ -421,13 +410,13 @@ ORDER BY trips DESC
 LIMIT 10;
 ```
 
-23.	Try the following query to see the compression rate of each column in the flights table
+<li>Try the following query to see the compression rate of each column in the flights table</li>
 
 ```
 ANALYZE COMPRESSION flights;
 ```
 
-24.	Enter the following command to create a table to hold the airport data
+<li>Enter the following command to create a table to hold the airport data</li>
 
 ```
 CREATE TABLE airports (
@@ -436,7 +425,7 @@ CREATE TABLE airports (
 );
 ```
 
-25.	Then enter the following command to import airport data into your Redshift cluster. Important! You will need to replace the IAM_ROLE with the Role ARN you have copied earlier.
+<li>Then enter the following command to import airport data into your Redshift cluster. Important! You will need to replace the IAM_ROLE with the Role ARN you have copied earlier.</li>
 
 ```
 COPY airports
@@ -448,7 +437,7 @@ REMOVEQUOTES
 REGION 'us-east-1';
 ```
 
-26.	Now try running the following query to create a new table about Las Vegas flights
+<li>Now try running the following query to create a new table about Las Vegas flights</li>
 
 ```
 CREATE TABLE vegas_flights
@@ -463,7 +452,7 @@ JOIN airports ON origin = airport_code
 WHERE dest = 'LAS';
 ```
 
-27.	Run the following query discover where the most popular flights to Las Vegas originate
+<li>Run the following query discover where the most popular flights to Las Vegas originate</li>
 
 ```
 SELECT
