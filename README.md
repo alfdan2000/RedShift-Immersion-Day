@@ -21,14 +21,12 @@ You will use Athena to define columns you needed with the right type and point t
 <ol type="I">
 <li>Navigate to Athena in the console 
 
-<ol type="II">
 <li>Enter the following HIVE DDL statement to create a database in glue metadata store</li>
 	
 ```
 CREATE DATABASE gdelt;
 ```
 
-<ol type="II">
 <li>Create a Table referring to the S3 bucket holding all files in the AWS account.</li>
 <ol type="A">
 	<li>Before we proceed, a few remarks:</li>
