@@ -1,11 +1,11 @@
-# Redshift-Immersion-Day
+# RedShift-Immersion-Day
 
 ## Lab 2.4 
 ## Working with a 170GB Public Dataset (Global DB of Events, Language & Tone)
 
 In the previous labs, you worked with an extremly small dataset (less than < 10MB) and with a single data source. In this lab, let’s use a public dataset with bigger size and more tables and observe various services. 
 
-![GDelt Project image](https://csaimmersiondaymaterial.s3-us-west-2.amazonaws.com/gdelt+project.png)
+![GDelt Project image](https://csaimmersiondaymaterial.s3-us-west-2.amazonaws.com/Redshift/gdelt+project.png)
 
 
 The [Global Database of Events, Language and Tone (GDELT) Project](http://www.gdeltproject.org/) monitors the world's broadcast, print, and web news from nearly every corner of every country in over 100 languages and identifies the people, locations, organisations, counts, themes, sources, emotions, counts, quotes, images and events driving our global society every second of every day. The data set v1.0 is publicly available in S3 in the [Registry of Open Data on AWS](https://aws.amazon.com/public-datasets/gdelt/).
@@ -112,19 +112,19 @@ WITH SERDEPROPERTIES (
 <ol type="i">
 <li>The <b><i>Countries</i></b> file that will be used as a lookup table looks like below: https://www.gdeltproject.org/data/lookups/CAMEO.country.txt</li>
 
-![country files image](https://csaimmersiondaymaterial.s3-us-west-2.amazonaws.com/country+files.png) 
+![country files image](https://csaimmersiondaymaterial.s3-us-west-2.amazonaws.com/Redshift/country+files.png) 
 
 <li>The <b><i>EventCodes</b></i> file that will be used as a lookup table looks like below: https://www.gdeltproject.org/data/lookups/CAMEO.eventcodes.txt</li>
 
-![Event code image](https://csaimmersiondaymaterial.s3-us-west-2.amazonaws.com/event+codes.png) 
+![Event code image](https://csaimmersiondaymaterial.s3-us-west-2.amazonaws.com/Redshift/event+codes.png) 
 
 <li>The <b><i>Groups</b></i> file that will be used as a lookup table looks like below:</li>
  
-![Group file image](https://csaimmersiondaymaterial.s3-us-west-2.amazonaws.com/group+files.png)
+![Group file image](https://csaimmersiondaymaterial.s3-us-west-2.amazonaws.com/Redshift/group+files.png)
 
 <li>The <b><i>Types</b></i> file that will be used as a lookup table looks like below:</li>
 
-![Type file Image](https://csaimmersiondaymaterial.s3-us-west-2.amazonaws.com/type+files.png) 
+![Type file Image](https://csaimmersiondaymaterial.s3-us-west-2.amazonaws.com/Redshift/type+files.png) 
 </ol type="i">
 
 <li>To maket his exercise interesting, you will store these files in your S3 bucket. The Events table and the lookup tables will be used in a few queries using Athena. </li>
@@ -149,7 +149,7 @@ WITH SERDEPROPERTIES (
 <li>Folder 4: 	<b><i>types</b></i></li>
 </ol type="A">
 
-![Folders images](https://csaimmersiondaymaterial.s3-us-west-2.amazonaws.com/folders.png)
+![Folders images](https://csaimmersiondaymaterial.s3-us-west-2.amazonaws.com/Redshift/folders.png)
 
 <li>Put the corresponding file under each bucket (e.g. </li>
 <ol type="A">
@@ -234,7 +234,7 @@ SELECT year,
 ```
 
 Output:
-![output 1 image](https://csaimmersiondaymaterial.s3-us-west-2.amazonaws.com/output.png)
+![output 1 image](https://csaimmersiondaymaterial.s3-us-west-2.amazonaws.com/Redshift/output.png)
 
 <li>Notice the data amount scanned? The results are returned in less than 30 seconds by scanning 175 GB of data from thousands of uncompressed CSV files on S3. That’s the power of HIVE, Presto and other Hadoop Technologies simplified by Athena Service.</li>
 
@@ -255,7 +255,7 @@ SELECT eventcode,
 ```
 
 Output:
-![output 2 image](https://csaimmersiondaymaterial.s3-us-west-2.amazonaws.com/output+2.png)
+![output 2 image](https://csaimmersiondaymaterial.s3-us-west-2.amazonaws.com/Redshift/output+2.png)
  
 
 <li>Count US President Obama events per year:</li>
@@ -271,7 +271,7 @@ SELECT year,
 ```
 
 Output:
-![output 3 image](https://csaimmersiondaymaterial.s3-us-west-2.amazonaws.com/output+3.png)
+![output 3 image](https://csaimmersiondaymaterial.s3-us-west-2.amazonaws.com/Redshift/output+3.png)
 
 <li>Count Obama/Putin events per category</li>
 
@@ -292,7 +292,7 @@ SELECT eventcode,
 ```
 
 Output:
-![output 4 image](https://csaimmersiondaymaterial.s3-us-west-2.amazonaws.com/output+4.png)
+![output 4 image](https://csaimmersiondaymaterial.s3-us-west-2.amazonaws.com/Redshift/output+4.png)
 
 <li>None of these took more than 30 seconds and that's with uncompressed CSV, the least performing data format possible. Converting the data set columnar formats such as Parquet would yield a massive improvement</li>
 </ol type="1">
@@ -320,7 +320,7 @@ Now you will use Redshift to to query a different dataset. We will import a flig
 <li>Set the <b><i>Master user password</b></i> and and select the IAM role you have created in the previous step. Then click <b><i>Launch Cluster</b></i>. Launching the cluster will take a few minutes</li>
 <li>Once the cluster has launched, navigate to the <b><i>Query Editor</b></i> and enter the credentials that you have set just earlier.</li>
 	
-![Credentials Image](https://csaimmersiondaymaterial.s3-us-west-2.amazonaws.com/credentials.png) 
+![Credentials Image](https://csaimmersiondaymaterial.s3-us-west-2.amazonaws.com/Redshift/credentials.png) 
 
 <li>Enter the following command to create a table to hold the flights data</li>
 
