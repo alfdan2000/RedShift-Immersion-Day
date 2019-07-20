@@ -370,11 +370,13 @@ SELECT * FROM flights ORDER BY random() LIMIT 25;
 ```
 
 <li>Top 10 airlines by the number of departures</li>
-</ol type="A">
+
 
 ```
 SELECT carrier, SUM (departures) FROM flights GROUP BY carrier ORDER BY 2 DESC LIMIT 10;
 ```
+
+</ol type="A">
 
 <li>Enter the following command to create a table to hold the aircraft data</li>
 
