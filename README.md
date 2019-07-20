@@ -98,49 +98,48 @@ WITH SERDEPROPERTIES (
 ```
 
 4.	Create lookup tables.
-a.	There are a few tables in the GDELT dataset, and they provide human-friendly descriptions to event codes and country codes in the events table defined in the previous step. They are also TSV files stored in S3.
-i.	The Countries file that will be used as a lookup table looks like below: [https://www.gdeltproject.org/data/lookups/CAMEO.country.txt](https://www.gdeltproject.org/data/lookups/CAMEO.country.txt)
+	a.	There are a few tables in the GDELT dataset, and they provide human-friendly descriptions to event codes and country codes in the events table defined in the previous step. They are also TSV files stored in S3.
+		i.	The Countries file that will be used as a lookup table looks like below: [https://www.gdeltproject.org/data/lookups/CAMEO.country.txt](https://www.gdeltproject.org/data/lookups/CAMEO.country.txt)
 
 ![country files image](https://csaimmersiondaymaterial.s3-us-west-2.amazonaws.com/country+files.png =50x) 
 
-ii.	The EventCodes file that will be used as a lookup table looks like below:  [https://www.gdeltproject.org/data/lookups/CAMEO.eventcodes.txt](https://www.gdeltproject.org/data/lookups/CAMEO.eventcodes.txt)
+		ii.	The EventCodes file that will be used as a lookup table looks like below:  [https://www.gdeltproject.org/data/lookups/CAMEO.eventcodes.txt](https://www.gdeltproject.org/data/lookups/CAMEO.eventcodes.txt)
 
 ![Event code image](https://csaimmersiondaymaterial.s3-us-west-2.amazonaws.com/event+codes.png) 
 
-iii.	The Groups file that will be used as a lookup table looks like below:
+		iii.	The Groups file that will be used as a lookup table looks like below:
  
 ![Group file image](https://csaimmersiondaymaterial.s3-us-west-2.amazonaws.com/group+files.png)
 
-iv.	The Types file that will be used as a lookup table looks like below:
+		iv.	The Types file that will be used as a lookup table looks like below:
 
 ![Type file Image](https://csaimmersiondaymaterial.s3-us-west-2.amazonaws.com/type+files.png) 
 
-b.	To maket his exercise interesting, you will store these files in your S3 bucket. The Events table and the lookup tables will be used in a few queries using Athena. 
+	b.	To maket his exercise interesting, you will store these files in your S3 bucket. The Events table and the lookup tables will be used in a few queries using Athena. 
 
 5.	First, download the files below to your computer:
-a.	Eventcodes: https://www.gdeltproject.org/data/lookups/CAMEO.eventcodes.txt
-b.	Countries: https://www.gdeltproject.org/data/lookups/CAMEO.country.txt
-c.	Types: https://www.gdeltproject.org/data/lookups/CAMEO.type.txt 
-d.	Groups: https://www.gdeltproject.org/data/lookups/CAMEO.knowngroup.txt
+	a.	Eventcodes: [](https://www.gdeltproject.org/data/lookups/CAMEO.eventcodes.txt)
+	b.	Countries: [](https://www.gdeltproject.org/data/lookups/CAMEO.country.txt)
+	c.	Types: [](https://www.gdeltproject.org/data/lookups/CAMEO.type.txt)
+	d.	Groups: [](https://www.gdeltproject.org/data/lookups/CAMEO.knowngroup.txt)
 
 
 
 6.	Navigate to S3 in your console. We will reuse the S3 bucket that was created in the previous lab.
 
 7.	Open your bucket and create the following 4 folders (all lowercase)
-a.	Folder 1: 	countries
-b.	Folder 2: 	eventcodes
-c.	Folder 3: 	groups 
-d.	Folder 4: 	types
+	a.	Folder 1: 	countries
+	b.	Folder 2: 	eventcodes
+	c.	Folder 3: 	groups 
+	d.	Folder 4: 	types
 
- 
-
+![Folders images](https://csaimmersiondaymaterial.s3-us-west-2.amazonaws.com/folders.png)
 
 8.	Put the corresponding file under each bucket (e.g. 
-a.	Upload CAMEO.eventcodes.txt file from your computer under eventcodes
-b.	Upload CAMEO. countries.txt file from your computer under countries
-c.	Upload CAMEO. groups.txt file from your computer under groups
-d.	Upload CAMEO. types.txt file from your computer under types
+	a.	Upload CAMEO.eventcodes.txt file from your computer under eventcodes
+	b.	Upload CAMEO. countries.txt file from your computer under countries
+	c.	Upload CAMEO. groups.txt file from your computer under groups
+	d.	Upload CAMEO. types.txt file from your computer under types
 
 9.	Navigate to your Athena Console. You will now add the files to your data catalogue
 
@@ -148,6 +147,7 @@ d.	Upload CAMEO. types.txt file from your computer under types
 
 11.	Add eventcodes to the data catalogue by pasting the DDL below to Athena Console, replacing your initials and selecting “Run Query”
 
+```
 CREATE EXTERNAL TABLE IF NOT EXISTS gdelt.eventcodes (
          `code` string,
          `description` string 
@@ -157,8 +157,11 @@ WITH SERDEPROPERTIES (
          'serialization.format' = '\t','field.delim' = '\t') 
 LOCATION 's3://<your initials + two digit number>-tame-bda-immersion/eventcodes' 
 TBLPROPERTIES ( "skip.header.line.count"="1")
+```
+
 12.	Add types to the data catalogue by pasting the DDL below to Athena Console, replacing your initials and selecting “Run Query”
 
+```
 CREATE EXTERNAL TABLE IF NOT EXISTS gdelt.types (
         `type` string,
         `description` string
@@ -168,11 +171,11 @@ WITH SERDEPROPERTIES (
         'serialization.format' = '\t','field.delim' = '\t') 
 LOCATION 's3://<your initials + two digit number>-tame-bda-immersion/types/'
 TBLPROPERTIES ( "skip.header.line.count"="1");
-
-
+```
 
 13.	Add groups to the data catalogue by pasting the DDL below to Athena Console, replacing your initials and selecting “Run Query”
 
+```
 CREATE EXTERNAL TABLE IF NOT EXISTS gdelt.groups (
         `group` string,
         `description` string
@@ -182,11 +185,11 @@ WITH SERDEPROPERTIES (
         'serialization.format' = '\t','field.delim' = '\t') 
 LOCATION 's3://<your initials + two digit number>-tame-bda-immersion/groups/'
 TBLPROPERTIES ( "skip.header.line.count"="1");
-
+```
 
 14.	Add countries to the data catalogue by pasting the DDL below to Athena Console, replacing your initials and selecting “Run Query”
 
-
+```
 CREATE EXTERNAL TABLE IF NOT EXISTS gdelt.countries (
         `code` string,
         `country` string
@@ -196,29 +199,28 @@ WITH SERDEPROPERTIES (
         'serialization.format' = '\t','field.delim' = '\t') 
 LOCATION 's3://<your initials + two digit number>-tame-bda-immersion/countries/'
 TBLPROPERTIES ( "skip.header.line.count"="1");
-
-
-
+```
 
 15.	Now lets explore the data with the queries below. 
-a.	First find the number of events per year from the Events table
+	a.	First find the number of events per year from the Events table
 
+```
 	-- Find the number of events per year
 SELECT year,
 	       COUNT(globaleventid) AS nb_events
 	FROM gdelt.events
 	GROUP BY year
 	ORDER BY year ASC;
-
+```
 
 Output:
- 
+![output 1 image](https://csaimmersiondaymaterial.s3-us-west-2.amazonaws.com/output.png)
 
 16.	Notice the data amount scanned? The results are returned in less than 30 seconds by scanning 175 GB of data from thousands of uncompressed CSV files on S3. That’s the power of HIVE, Presto and other Hadoop Technologies simplified by Athena Service.
 
 17.	Now let’s show the sorted top 10 event categories by joining Events table and the Eventcode lookup table:
 
-
+```
 	-- Show top 10 event categories
 SELECT eventcode,
 	       gdelt.eventcodes.description,
@@ -230,14 +232,15 @@ SELECT eventcode,
 	      ORDER BY nb_events DESC LIMIT 10)
 	  JOIN gdelt.eventcodes ON eventcode = gdelt.eventcodes.code
 	ORDER BY nb_events DESC;
+```
 
 Output:
-
+![output 2 image](https://csaimmersiondaymaterial.s3-us-west-2.amazonaws.com/output+2.png)
  
 
 18.	Count US President Obama events per year:
 
-
+```
 	-- Count Obama events per year
 SELECT year,
 	       COUNT(globaleventid) AS nb_events
@@ -245,16 +248,14 @@ SELECT year,
 	WHERE actor1name='BARACK OBAMA'
 	GROUP BY year
 	ORDER BY year ASC;
-
-
+```
 
 Output:
- 
+![output 3 image](https://csaimmersiondaymaterial.s3-us-west-2.amazonaws.com/output+3.png)
 
 19.	Count Obama/Putin events per category
 
-
-
+```
 	-- Count Obama/Putin events per category
 SELECT eventcode,
 	       gdelt.eventcodes.description,
@@ -268,15 +269,12 @@ SELECT eventcode,
 	  JOIN gdelt.eventcodes ON eventcode = gdelt.eventcodes.code
 	  WHERE nb_events >= 50
 	ORDER BY nb_events DESC;
-	
-
+```
 
 Output:
- 
+![output 4 image](https://csaimmersiondaymaterial.s3-us-west-2.amazonaws.com/output+4.png)
 
 20.	None of these took more than 30 seconds and that's with uncompressed CSV, the least performing data format possible. Converting the data set columnar formats such as Parquet would yield a massive improvement
-
-
 
 
 
@@ -314,134 +312,147 @@ Now you will use Redshift to to query a different dataset. We will import a flig
 14.	Set the Master user password and and select the IAM role you have created in the previous step. Then click Launch Cluster. Launching the cluster will take a few minutes
 
 15.	Once the cluster has launched, navigate to the Query Editor and enter the credentials that you have set just earlier.
-
-
-
-
- 
+![Credentials Image](https://csaimmersiondaymaterial.s3-us-west-2.amazonaws.com/credentials.png) 
 
 16.	Enter the following command to create a table to hold the flights data
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+```
+CREATE TABLE flights (
+  year smallint,
+  month smallint,
+  day smallint,
+  carrier varchar(80) DISTKEY,
+  origin  char(3),
+  dest char(3),
+  aircraft_code  char(3),
+  miles int,
+  departures int,
+  minutes  int,
+  seats int,
+  passengers  int,
+  freight_pounds int
+);
+```
 
 17.	Then enter the following command to import data into your Redshift cluster. Important! You will need to replace the IAM_ROLE with the Role ARN you have copied earlier.
 
-
-
-
-
-
-
-
+```
+COPY flights
+FROM 's3://redshift-sample-datasets-us-east-1/flights000.gz'
+IAM_ROLE 'arn:aws:iam::XXXXXXXXXX:role/myRedshiftRole'
+GZIP
+DELIMITER '|'
+REMOVEQUOTES
+REGION 'us-east-1';
+```
 
 18.	 Now you are ready to query the data. Try using the following commands to query the data. Feel free to try your own commands.
 
-a.	Get the number of rows in the flights table
+	a.	Get the number of rows in the flights table
 
 SELECT COUNT(*) FROM flights;
 
-b.	Query 25 random rows of data
+	b.	Query 25 random rows of data
 
 SELECT * FROM flights ORDER BY random() LIMIT 25;
 
-c.	Top 10 airlines by the number of departures
+	c.	Top 10 airlines by the number of departures
 
 SELECT carrier, SUM (departures) FROM flights GROUP BY carrier ORDER BY 2 DESC LIMIT 10;
 
 19.	Enter the following command to create a table to hold the aircraft data
 
-
-
-
-
+```
+CREATE TABLE aircraft (
+  aircraft_code CHAR(3) SORTKEY,
+  aircraft      VARCHAR(100)
+);
+```
 
 20.	Then enter the following command to import aircraft into your Redshift cluster. Important! You will need to replace the IAM_ROLE with the Role ARN you have copied earlier.
 
-
-
-
-
-
-
-
-
+```
+COPY aircraft
+FROM 's3://redshift-sample-datasets-us-east-1/aircraft'
+IAM_ROLE 'arn:aws:iam::XXXXXXXXXX:role/myRedshiftRole'
+GZIP
+DELIMITER '|'
+REMOVEQUOTES
+REGION 'us-east-1';
+```
 
 21.	Enter the following command verify that the data import was completed successfully and to view 10 rows of aircraft data
 
+```
 SELECT * FROM aircraft ORDER BY random() LIMIT 10;
-
-
-
-
-
+```
 
 22.	You can now join the two tables you have created. Try the following command to query fort he most-flown types of aircraft
 
-
-
-
-
-
-
-
-
+```
+SELECT
+  aircraft,
+  SUM(departures) AS trips
+FROM flights
+JOIN aircraft using (aircraft_code)
+GROUP BY aircraft
+ORDER BY trips DESC
+LIMIT 10;
+```
 
 23.	Try the following query to see the compression rate of each column in the flights table
 
+```
 ANALYZE COMPRESSION flights;
+```
 
 24.	Enter the following command to create a table to hold the airport data
 
-
-
-
-
+```
+CREATE TABLE airports (
+  airport_code CHAR(3) SORTKEY,
+  airport      varchar(100)
+);
+```
 
 25.	Then enter the following command to import airport data into your Redshift cluster. Important! You will need to replace the IAM_ROLE with the Role ARN you have copied earlier.
 
-
-
-
-
-
-
-
-
+```
+COPY airports
+FROM 's3://redshift-sample-datasets-us-east-1/airports'
+IAM_ROLE 'arn:aws:iam::XXXXXXXXX:role/myRedshiftRole'
+GZIP
+DELIMITER '|'
+REMOVEQUOTES
+REGION 'us-east-1';
+```
 
 26.	Now try running the following query to create a new table about Las Vegas flights
 
-
-
-
-
-
-
-
+```
+CREATE TABLE vegas_flights
+  DISTKEY (origin)
+  SORTKEY (origin)
+AS
+SELECT
+  flights.*,
+  airport
+FROM flights
+JOIN airports ON origin = airport_code
+WHERE dest = 'LAS';
+```
 
 27.	Run the following query discover where the most popular flights to Las Vegas originate
 
-
-
-
-
-
-
-
+```
+SELECT
+  airport,
+  to_char(SUM(passengers), '999,999,999') as passengers
+FROM vegas_flights
+GROUP BY airport
+ORDER BY SUM(passengers) desc
+LIMIT 10;
+```
 
 
 
