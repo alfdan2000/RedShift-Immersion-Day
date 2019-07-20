@@ -1,4 +1,4 @@
-# RedShift-Immersion-Day
+# Redshift-Immersion-Day
 
 ## Lab 2.4 
 ## Working with a 170GB Public Dataset (Global DB of Events, Language & Tone)
