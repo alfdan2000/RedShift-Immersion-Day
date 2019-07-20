@@ -20,20 +20,24 @@ You will use Athena to define columns you needed with the right type and point t
 
 <ol type="I">
 <li>Navigate to Athena in the console 
-</ol>
 
-2.	Enter the following HIVE DDL statement to create a database in glue metadata store
+<ol type="II">
+<li>Enter the following HIVE DDL statement to create a database in glue metadata store</li>
+	
 ```
 CREATE DATABASE gdelt;
 ```
 
-
-3.	Create a Table referring to the S3 bucket holding all files in the AWS account.
-	a.	Before we proceed, a few remarks:
-		i.	We are creating a schema definition in our Glue service, in our Data Catalogue
-		ii.	The actual data is in another AWS account
-		iii.	You can Access this data, because it is a public dataset located in 's3://gdelt-open-data/events/folder, and is open to everyone.
-		iv.	Although we are creating TABLEs, there is no database. The events table is a representation of thousands of TSV (Tab Seperated Files) files stored in S3. Technologies like Apache HIVE and Presto enables accessing them using SQL like expressions.
+<ol type="II">
+<li>Create a Table referring to the S3 bucket holding all files in the AWS account.</li>
+<ol type="A">
+	<li>Before we proceed, a few remarks:</li>
+<ol type="i">
+<li>We are creating a schema definition in our Glue service, in our Data Catalogue</li>
+<li>The actual data is in another AWS account</li>
+<li>You can Access this data, because it is a public dataset located in 's3://gdelt-open-data/events/folder, and is open to everyone.</li>
+<li>Although we are creating TABLEs, there is no database. The events table is a representation of thousands of TSV (Tab Seperated Files) files stored in S3. Technologies like Apache HIVE and Presto enables accessing them using SQL like expressions.</li>
+</ol>
 
 ```
 CREATE EXTERNAL TABLE IF NOT EXISTS gdelt.events (
