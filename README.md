@@ -31,9 +31,7 @@ ii.	The actual data is in another AWS account
 iii.	You can Access this data, because it is a public dataset located in 's3://gdelt-open-data/events/folder, and is open to everyone.
 iv.	Although we are creating TABLEs, there is no database. The events table is a representation of thousands of TSV (Tab Seperated Files) files stored in S3. Technologies like Apache HIVE and Presto enables accessing them using SQL like expressions.
 
-
-
-
+```
 CREATE EXTERNAL TABLE IF NOT EXISTS gdelt.events (
         `globaleventid` INT,
         `day` INT,
@@ -97,21 +95,25 @@ CREATE EXTERNAL TABLE IF NOT EXISTS gdelt.events (
 ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe'
 WITH SERDEPROPERTIES (
         'serialization.format' = '\t','field.delim' = '\t') LOCATION 's3://gdelt-open-data/events/';
+```
 
 4.	Create lookup tables.
 a.	There are a few tables in the GDELT dataset, and they provide human-friendly descriptions to event codes and country codes in the events table defined in the previous step. They are also TSV files stored in S3.
-i.	The Countries file that will be used as a lookup table looks like below: https://www.gdeltproject.org/data/lookups/CAMEO.country.txt
- 
+i.	The Countries file that will be used as a lookup table looks like below: [https://www.gdeltproject.org/data/lookups/CAMEO.country.txt](https://www.gdeltproject.org/data/lookups/CAMEO.country.txt)
 
-ii.	The EventCodes file that will be used as a lookup table looks like below:  https://www.gdeltproject.org/data/lookups/CAMEO.eventcodes.txt
+![country files image](https://csaimmersiondaymaterial.s3-us-west-2.amazonaws.com/country+files.png) 
 
- 
+ii.	The EventCodes file that will be used as a lookup table looks like below:  [https://www.gdeltproject.org/data/lookups/CAMEO.eventcodes.txt](https://www.gdeltproject.org/data/lookups/CAMEO.eventcodes.txt)
+
+![Event code image](https://csaimmersiondaymaterial.s3-us-west-2.amazonaws.com/event+codes.png) 
 
 iii.	The Groups file that will be used as a lookup table looks like below:
  
+![Group file image](https://csaimmersiondaymaterial.s3-us-west-2.amazonaws.com/group+files.png)
 
 iv.	The Types file that will be used as a lookup table looks like below:
- 
+
+![Type file Image](https://csaimmersiondaymaterial.s3-us-west-2.amazonaws.com/type+files.png) 
 
 b.	To maket his exercise interesting, you will store these files in your S3 bucket. The Events table and the lookup tables will be used in a few queries using Athena. 
 
