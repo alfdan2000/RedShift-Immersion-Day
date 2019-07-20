@@ -35,7 +35,9 @@ CREATE DATABASE gdelt;
 <li>The actual data is in another AWS account</li>
 <li>You can Access this data, because it is a public dataset located in 's3://gdelt-open-data/events/folder, and is open to everyone.</li>
 <li>Although we are creating TABLEs, there is no database. The events table is a representation of thousands of TSV (Tab Seperated Files) files stored in S3. Technologies like Apache HIVE and Presto enables accessing them using SQL like expressions.</li>
-</ol>
+</ol type="i">
+</ol type="A">
+
 
 ```
 CREATE EXTERNAL TABLE IF NOT EXISTS gdelt.events (
@@ -103,23 +105,25 @@ WITH SERDEPROPERTIES (
         'serialization.format' = '\t','field.delim' = '\t') LOCATION 's3://gdelt-open-data/events/';
 ```
 
-4.  Create lookup tables.
+<li>Create lookup tables.</li>
 
-a.  There are a few tables in the GDELT dataset, and they provide human-friendly descriptions to event codes and country codes in the events table defined in the previous step. They are also TSV files stored in S3.
+<ol type="A">
+<li>There are a few tables in the GDELT dataset, and they provide human-friendly descriptions to event codes and country codes in the events table defined in the previous step. They are also TSV files stored in S3.</li>
 
-i.  The Countries file that will be used as a lookup table looks like below: [](https://www.gdeltproject.org/data/lookups/CAMEO.country.txt)
+<ol type="i">
+<li>The Countries file that will be used as a lookup table looks like below: [](https://www.gdeltproject.org/data/lookups/CAMEO.country.txt)</li>
 
 ![country files image](https://csaimmersiondaymaterial.s3-us-west-2.amazonaws.com/country+files.png) 
 
-		ii.	The EventCodes file that will be used as a lookup table looks like below:  [https://www.gdeltproject.org/data/lookups/CAMEO.eventcodes.txt](https://www.gdeltproject.org/data/lookups/CAMEO.eventcodes.txt)
+<li>The EventCodes file that will be used as a lookup table looks like below:  [https://www.gdeltproject.org/data/lookups/CAMEO.eventcodes.txt](https://www.gdeltproject.org/data/lookups/CAMEO.eventcodes.txt)</li>
 
 ![Event code image](https://csaimmersiondaymaterial.s3-us-west-2.amazonaws.com/event+codes.png) 
 
-		iii.	The Groups file that will be used as a lookup table looks like below:
+<li>The Groups file that will be used as a lookup table looks like below:</li>
  
 ![Group file image](https://csaimmersiondaymaterial.s3-us-west-2.amazonaws.com/group+files.png)
 
-		iv.	The Types file that will be used as a lookup table looks like below:
+<li>The Types file that will be used as a lookup table looks like below:</li>
 
 ![Type file Image](https://csaimmersiondaymaterial.s3-us-west-2.amazonaws.com/type+files.png) 
 
