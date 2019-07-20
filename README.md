@@ -99,11 +99,11 @@ WITH SERDEPROPERTIES (
         'serialization.format' = '\t','field.delim' = '\t') LOCATION 's3://gdelt-open-data/events/';
 ```
 
-4.	Create lookup tables.
+4.Create lookup tables.
 
-  a.	There are a few tables in the GDELT dataset, and they provide human-friendly descriptions to event codes and country codes in the events table defined in the previous step. They are also TSV files stored in S3.
+  a.There are a few tables in the GDELT dataset, and they provide human-friendly descriptions to event codes and country codes in the events table defined in the previous step. They are also TSV files stored in S3.
 
-  i.	The Countries file that will be used as a lookup table looks like below: [](https://www.gdeltproject.org/data/lookups/CAMEO.country.txt)
+    i.The Countries file that will be used as a lookup table looks like below: [](https://www.gdeltproject.org/data/lookups/CAMEO.country.txt)
 
 ![country files image](https://csaimmersiondaymaterial.s3-us-west-2.amazonaws.com/country+files.png) 
 
