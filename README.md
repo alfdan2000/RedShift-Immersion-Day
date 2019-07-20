@@ -358,18 +358,24 @@ REGION 'us-east-1';
 <li>Now you are ready to query the data. Try using the following commands to query the data. Feel free to try your own commands.</li>
 <ol type="A">
 <li>Get the number of rows in the flights table</li>
+	
 ```
 SELECT COUNT(*) FROM flights;
 ```
+
 <li>Query 25 random rows of data</li>
+
 ```
 SELECT * FROM flights ORDER BY random() LIMIT 25;
 ```
+
 <li>Top 10 airlines by the number of departures</li>
 </ol type="A">
+
 ```
 SELECT carrier, SUM (departures) FROM flights GROUP BY carrier ORDER BY 2 DESC LIMIT 10;
 ```
+
 <li>Enter the following command to create a table to hold the aircraft data</li>
 
 ```
@@ -463,7 +469,7 @@ GROUP BY airport
 ORDER BY SUM(passengers) desc
 LIMIT 10;
 ```
-
+</ol type="1">
 
 
 
