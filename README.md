@@ -28,9 +28,9 @@ CREATE DATABASE gdelt;
 ```
 
 <li>Create a Table referring to the S3 bucket holding all files in the AWS account.</li>
-<ol type="A">
-<li>Before we proceed, a few remarks:</li>
 <ol type="i">
+<li>Before we proceed, a few remarks:</li>
+<ol type="A">
 <li>We are creating a schema definition in our Glue service, in our Data Catalogue</li>
 <li>The actual data is in another AWS account</li>
 <li>You can Access this data, because it is a public dataset located in 's3://gdelt-open-data/events/folder, and is open to everyone.</li>
